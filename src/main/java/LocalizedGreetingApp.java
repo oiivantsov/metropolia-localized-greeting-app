@@ -3,13 +3,10 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class LocalizedGreetingApp {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose language: en, fr, es, fa");
-        String lang = scanner.nextLine();
 
+    public static String getGreeting(String langCode) {
         Locale locale;
-        switch (lang) {
+        switch (langCode) {
             case "fr":
                 locale = new Locale("fr", "FR");
                 break;
@@ -24,6 +21,15 @@ public class LocalizedGreetingApp {
         }
 
         ResourceBundle messages = ResourceBundle.getBundle("messages", locale);
-        System.out.println(messages.getString("greeting"));
+        return messages.getString("greeting");
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Choose language: en, fr, es, fa");
+        String lang = scanner.nextLine();
+
+        String greeting = getGreeting(lang);
+        System.out.println(greeting);
     }
 }
